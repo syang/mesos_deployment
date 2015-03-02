@@ -1,5 +1,7 @@
 # Automatically Deploy Mesos Cluster
 
+Dockerize everything ...
+
 ## Automatically Find Dynamic Inventory
 1. GCE
 2. AWS
