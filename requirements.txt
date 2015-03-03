@@ -1,0 +1,4 @@
+boto
+ansible
+awscli
+
