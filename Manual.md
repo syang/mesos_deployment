@@ -2,9 +2,11 @@
 
 ## Preparing Environment
 1. Ansible Installation
+
 ```#brew update
 #brew install ansible
 ```
+
 2. Setup virtualenv and initialize environment
 (Needed only if you want to use dynamic inventory)
 
