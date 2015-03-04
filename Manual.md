@@ -3,7 +3,8 @@
 ## Preparing Environment
 1. Ansible Installation
 
-```#brew update
+```
+#brew update
 #brew install ansible
 ```
 
@@ -16,10 +17,12 @@
 
 3. Setup EC2 credential info
 (Needed only if you want to use dynamic inventory)
-`#export AWS_ACCESS_KEY_ID='xxx'`
-`#export AWS_SECRET_ACCESS_KEY='yyy'`
+```
+#export AWS_ACCESS_KEY_ID='xxx'
+#export AWS_SECRET_ACCESS_KEY='yyy'
+```
 Sanity Checking
-`#python ./inventory/dynamic_aws/ec2.py --list
+`#python ./inventory/dynamic_aws/ec2.py --list`
 
 ## NOTE:
 This project is developed under the following environment:
