@@ -17,18 +17,3 @@ Dockerize everything ...
 1. Mesos
 2. Spark
 3. Marathon
-
-
-# Preparing Environment
-1. Ansible Installation
-```#brew update
-#brew install ansible
-```
-
-
-## NOTE:
-This project is developed under the following environment:
-* brew 0.9.5
-* ruby 2.0.0
-* python 2.7.6
-* 1.8.4
