@@ -1,0 +1,8 @@
+---
+
+# ./roles/zookeeper/tasks/main.yml
+# Common Operations on Host Machines, Current CentOS only
+# TODO(syang): refactor into main.yml + (RehHat.yml/Debian.yml/CoreOS.yml)
+
+- name: run Zookeeper server
+  docker: image={{ZOOKEEPER_DOCKER_IMAGE_REPO}} port={{ZOOKEEPER_LINKED_PORT}}

@@ -1,4 +1,6 @@
 # A CentOS 7 Zookeeper Image from CDH 5
+# TODO(syang): Investigate and Reduce Docker Image Size
+
 
 FROM centos:7
 
@@ -17,6 +19,8 @@ RUN yum install -y curl java-1.7.0-openjdk rpm && \
  yum localinstall -y -q /tmp/cdh.rpm && \
  rpm --import /tmp/cdh.key
 
+# Update and clean unnecessary package cache
+RUN yum update && yum clean all
 
 # Install Zookeeper and its pre-requisites
 RUN yum install -y -q zookeeper-server

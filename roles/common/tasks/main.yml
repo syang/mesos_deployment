@@ -1,0 +1,14 @@
+---
+# roles/common/tasks/main.yml
+# Common Operations on Host Machines, Current CentOS only
+# TODO(syang): refactor into main.yml + (RehHat.yml/Debian.yml/CoreOS.yml)
+
+
+- name: Install Docker on host machines
+  yum: name=docker state=latest
+
+- name: Start Docker daemon
+  yum: service name=docker state=started
+
+- name: Make Docker daemon get started on later reboot
+  action: command /sbin/chkconfig docker on
