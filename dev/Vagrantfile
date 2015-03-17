@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 require 'yaml'
 
-hosts_file = YAML.load_file('./inventory/local_test/hosts_vagrant.yml')
+hosts_file = YAML.load_file('./hosts_vagrant.yml')
 hosts = hosts_file['hosts']
 
 os_family = "precise64"

@@ -2,6 +2,6 @@
   roles:
     - { role: zookeeper }
 
-- hosts: slaves
-  roles:
-    - { role: client }
+#- hosts: slaves
+#  roles:
+#    - { role: client }

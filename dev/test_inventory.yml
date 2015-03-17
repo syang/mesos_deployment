@@ -1,0 +1,12 @@
+---
+[masters]
+node1 ansible_ssh_host=192.168.33.11 ansible_ssh_user=vagrant
+node2 ansible_ssh_host=192.168.33.12 ansible_ssh_user=vagrant
+node3 ansible_ssh_host=192.168.33.13 ansible_ssh_user=vagrant
+
+[slaves]
+node4 ansible_ssh_host=192.168.33.14 ansible_ssh_user=vagrant
+
+[all:children]
+masters
+slaves
