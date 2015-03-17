@@ -1,0 +1,7 @@
+- hosts: masters
+  roles:
+    - { role: zookeeper }
+
+- hosts: slaves
+  roles:
+    - { role: client }

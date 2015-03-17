@@ -1,5 +1,5 @@
 ---
-# roles/common/tasks/main.yml
+# ./roles/common/tasks/main.yml
 # Common Operations on Host Machines, Current CentOS only
 # TODO(syang): refactor into main.yml + (RehHat.yml/Debian.yml/CoreOS.yml)
 
