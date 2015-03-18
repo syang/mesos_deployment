@@ -6,7 +6,6 @@ os_family=$(echo $2 | tr '[:lower:]' '[:upper:]')
 printf "\n$machine_type\t$os_family\n\n"
 
 #rm -rf ./Vagrantfile
-source rc
 
 if [ x$machine_type = xVAGRANT ]; then
   if [ ! x$os_family = xDEBIAN ] && [ ! x$os_family = xREDHAT ]; then
@@ -14,6 +13,7 @@ if [ x$machine_type = xVAGRANT ]; then
     exit 2
   fi
   vagrant up
+  source rc
   #export ANSIBLE_CONFIG=.ansible.cfg.vagrant
 #  ansible-playbook -i inventories/hosts_vagrant_ansible site.yml
 elif [ x$machine_type = xPHYSICAL ]; then
