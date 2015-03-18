@@ -1,0 +1,3 @@
+# Make per-vbox private_key available to ansible
+find  .vagrant |grep private_key | xargs ssh-add
+
