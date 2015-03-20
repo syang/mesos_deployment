@@ -4,6 +4,9 @@
   apt: name=docker.io state=latest
   sudo: yes
 
+- name: install easy_install
+  apt: name=python-setuptools state=latest
+
 - name: Install docker-py
   easy_install: name=docker-py
   sudo: yes
