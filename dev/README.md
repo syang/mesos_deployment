@@ -1,2 +1,4 @@
-source rc after running vagrant up
+#vagrant up
+#source rc
+#ansible-playbook -i test_inventory.yml site.yml
 
