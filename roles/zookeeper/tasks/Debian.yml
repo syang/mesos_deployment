@@ -1,0 +1,10 @@
+---
+
+- name: run zookeeper server
+  docker: 
+    docker_api_version: "{{ 1.10 }}"
+    name:  Zookeeper
+    image: "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}"
+    expose: "{{ ZOOKEEPER_LINKED_PORTS }}"
+    state: restarted
+  sudo: yes

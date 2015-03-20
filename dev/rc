@@ -1,5 +1,6 @@
 # Make per-vbox private_key available to ansible.
 # This is needed because Vagrant 1.7.2 generates different keys
 # for each VM it creates
+killall ssh-agent; eval `ssh-agent`
 find .vagrant | grep private_key | xargs ssh-add
 
