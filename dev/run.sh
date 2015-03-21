@@ -1,25 +1,6 @@
 #!/bin/bash
 
-machine_type=$(echo $1 | tr '[:lower:]' '[:upper:]')
-os_family=$(echo $2 | tr '[:lower:]' '[:upper:]')
+vagrant up
+source rc
+ansible-playbook -i test_inventory.yml site.yml
 
-printf "\n$machine_type\t$os_family\n\n"
-
-#rm -rf ./Vagrantfile
-
-if [ x$machine_type = xVAGRANT ]; then
-  if [ ! x$os_family = xDEBIAN ] && [ ! x$os_family = xREDHAT ]; then
-    echo "Usage: run.sh [vagrant [debian | redhat] | physical <inventory>] "
-    exit 2
-  fi
-  vagrant up
-  source rc
-  #export ANSIBLE_CONFIG=.ansible.cfg.vagrant
-#  ansible-playbook -i inventories/hosts_vagrant_ansible site.yml
-elif [ x$machine_type = xPHYSICAL ]; then
-  #export ANSIBLE_CONFIG=.ansible.cfg.physical
-#  ansible-playbook -i inventories/$2 site.yml
-else
-  echo "Usage: run.sh [vagrant [debian | redhat] | physical <inventory>] "
-  exit 1
-fi

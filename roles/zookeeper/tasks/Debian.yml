@@ -1,10 +1,25 @@
 ---
 
+#- name: run zookeeper server
+#  docker: 
+#    docker_api_version: "1.10"
+#    name:  Zookeeper
+#    image: "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}"
+#    #expose: "{{ ZOOKEEPER_LINKED_PORTS }}"
+#    state: running
+#  sudo: yes
+
+- name: test if there exists a running zookeeper
+  command: >
+    docker.io ps -l | grep "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}" | wc
+  register: already_running
+
 - name: run zookeeper server
-  docker: 
-    docker_api_version: "1.10"
-    name:  Zookeeper
-    image: "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}"
-    #expose: "{{ ZOOKEEPER_LINKED_PORTS }}"
-    state: restarted
-  sudo: yes
+  command: >
+    docker.io run -d
+    -p "{{ ZOOKEEPER_PORT1 }}:{{ ZOOKEEPER_PORT1 }}"
+    -p "{{ ZOOKEEPER_PORT2 }}:{{ ZOOKEEPER_PORT2 }}"
+    -p "{{ ZOOKEEPER_PORT3 }}:{{ ZOOKEEPER_PORT3 }}"
+    -name {{ zookeeper_container_name }}
+    "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}"
+  when: already_running == 0

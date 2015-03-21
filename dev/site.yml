@@ -1,4 +1,5 @@
 - hosts: masters
+  sudo: yes
   roles:
     - { role: common}
     - { role: zookeeper }
