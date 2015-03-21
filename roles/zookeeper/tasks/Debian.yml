@@ -11,8 +11,11 @@
 
 - name: test if there exists a running zookeeper
   command: >
-    docker.io ps -l | grep "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}" | wc
-  register: already_running
+    docker.io ps -l | grep "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}" | 
+    grep "Up" | wc
+  register: count_already_running
+
+- debug: var=count_already_running
 
 - name: run zookeeper server
   command: >
@@ -22,4 +25,4 @@
     -p "{{ ZOOKEEPER_PORT3 }}:{{ ZOOKEEPER_PORT3 }}"
     -name {{ zookeeper_container_name }}
     "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}"
-  when: already_running == 0
+  when: count_already_running != 1
