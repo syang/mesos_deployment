@@ -10,19 +10,29 @@
 #  sudo: yes
 
 - name: test if there exists a running zookeeper
-  command: >
-    docker.io ps -l | grep "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}" | 
-    grep "Up" | wc
-  register: count_already_running
+  shell: >
+    if (docker.io ps -a | grep -q "Up .* {{ zookeeper_container_name }}" ); then
+       echo 'running'
+    elif (docker.io ps -a | grep -q "Exit .* {{ zookeeper_container_name }}" ); then
+       echo 'exited'
+    else
+       echo 'not running'
+    fi
+  register: whether_running
 
-- debug: var=count_already_running
+#- debug: var=whether_running
+
+
+- name: clean zookeeper server if it ran before
+  shell: docker.io rm "{{ zookeeper_container_name }}"
+  when: whether_running.stdout == 'exited'
 
 - name: run zookeeper server
-  command: >
+  shell: >
     docker.io run -d
     -p "{{ ZOOKEEPER_PORT1 }}:{{ ZOOKEEPER_PORT1 }}"
     -p "{{ ZOOKEEPER_PORT2 }}:{{ ZOOKEEPER_PORT2 }}"
     -p "{{ ZOOKEEPER_PORT3 }}:{{ ZOOKEEPER_PORT3 }}"
-    -name {{ zookeeper_container_name }}
+    --name "{{ zookeeper_container_name }}"
     "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}"
-  when: count_already_running != 1
+  when: whether_running.stdout != 'running'
