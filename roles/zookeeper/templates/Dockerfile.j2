@@ -1,25 +1,24 @@
 FROM {{ UBUNTU_REPO }}
 
 MAINTAINER SysCompass Team
-
+WORKDIR "/root"
 
 RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget
 RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar -xzf - -C /opt \
     && mv /opt/zookeeper-3.4.6 /opt/zookeeper \
     && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
-    && mkdir -p /tmp/zookeeper
+    && mkdir -p /tmp/zookeeper \
+    && mkdir -p /var/log/zookeeper
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
 EXPOSE {{ zookeeper_port1 }} {{ zookeeper_port2 }} {{ zookeeper_port3 }}
 
-WORKDIR /opt/zookeeper
-
 # TODO(syang): this may need further improvement
 VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
 
-ADD {{ zookeeper_cfg_path_on_host }} /opt/zookeeper/conf/zoo.cfg
-ADD {{ zookeeper_myid_path_on_host }} /var/zookeeper/myid
+ADD zoo.cfg /opt/zookeeper/conf/zoo.cfg
+ADD myid /var/lib/zookeeper/myid
 
-CMD ["/opt/zookeeper/bin/zkServer.sh start-foreground"]
+CMD ["/opt/zookeeper/bin/zkServer.sh", "start-foreground"]
 

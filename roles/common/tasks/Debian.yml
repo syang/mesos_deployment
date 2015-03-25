@@ -1,13 +1,9 @@
 ---
+- name: update and install wget
+  apt: name=wget state=latest update_cache=yes
 
-- name: Install Docker daemon on host machines
-  apt: name=docker.io state=latest
+- name: get latest docker
+  shell: wget -qO- https://get.docker.com/ | sh
 
-- name: install easy_install
-  apt: name=python-setuptools state=latest
-
-- name: Install docker-py
-  easy_install: name=docker-py
-
-- name: Start Docker daemon
-  service:  name=docker.io state=started
+- name: start docker daemon
+  service: name=docker state=started

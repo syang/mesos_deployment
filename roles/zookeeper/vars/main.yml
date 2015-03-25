@@ -21,6 +21,6 @@ servers: ""
 zookeeper_container_name: zookeeper_container
 zookeeper_cfg_path_on_host: /tmp/zoo.cfg
 zookeeper_myid_path_on_host: /tmp/myid
-dockerfile_on_host: ~/Dockerfile
-dockerfile_path_on_host: ~/
+dockerfile_on_host: /tmp/Dockerfile
+dockerfile_path_on_host: /tmp/
 local_image_name: zookeeper_snapshot
