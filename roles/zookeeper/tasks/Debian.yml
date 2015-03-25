@@ -20,19 +20,34 @@
     fi
   register: whether_running
 
-#- debug: var=whether_running
-
 
 - name: clean zookeeper server if it ran before
   shell: docker.io rm "{{ zookeeper_container_name }}"
   when: whether_running.stdout == 'exited'
 
-- name: run zookeeper server
+- name: Overwrite myid file
+  template: src=myid.j2 dest="{{ zookeeper_myid_path_on_host }}"
+
+- name: Overwrite default config file
+  template: src=zoo.cfg.j2 dest="{{ zookeeper_cfg_path_on_host }}"
+
+
+- name: Copy Dockerfile to the host
+  template: src=Dockerfile.j2 dest="{{ dockerfile_on_host }}"
+
+#- debug: var=whether_running
+
+- name: Build docker image
+  shell: 
+    docker.io build -t "{{ local_image_name }}" "{{ dockerfile_path_on_host }}"
+
+
+- name: run zookeeper container
   shell: >
     docker.io run -d
-    -p "{{ ZOOKEEPER_PORT1 }}:{{ ZOOKEEPER_PORT1 }}"
-    -p "{{ ZOOKEEPER_PORT2 }}:{{ ZOOKEEPER_PORT2 }}"
-    -p "{{ ZOOKEEPER_PORT3 }}:{{ ZOOKEEPER_PORT3 }}"
+    -p "{{ zookeeper_port1 }}:{{ zookeeper_port1 }}"
+    -p "{{ zookeeper_port2 }}:{{ zookeeper_port2 }}"
+    -p "{{ zookeeper_port3 }}:{{ zookeeper_port3 }}"
     --name "{{ zookeeper_container_name }}"
-    "{{ ZOOKEEPER_DOCKER_IMAGE_REPO }}"
+    "{{ local_image_name }}"
   when: whether_running.stdout != 'running'

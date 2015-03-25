@@ -1,0 +1,20 @@
+tickTime={{tick_time}}
+dataDir={{data_dir}}
+dataLogDir={{log_dir}}
+clientPort={{client_port}}
+initLimit={{init_limit}}
+syncLimit={{sync_limit}}
+
+
+
+{% if 'zookeepers' in groups %}
+
+{% for host in groups.zookeepers %}
+server.{{ hostvars[host].zookeeper_id }}={{ hostvars[host].ipv4_address|default(hostvars[host]['ansible_default_ipv4']['address']) }}:2888:3888
+{% endfor %}
+
+{% else %}
+
+server.1=localhost:2888:3888
+
+{% endif %}

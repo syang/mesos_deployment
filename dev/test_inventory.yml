@@ -1,11 +1,11 @@
-[masters]
-host1 ansible_ssh_host=192.168.33.11 ansible_ssh_user=vagrant
-host2 ansible_ssh_host=192.168.33.12 ansible_ssh_user=vagrant
-host3 ansible_ssh_host=192.168.33.13 ansible_ssh_user=vagrant
+[zookeepers]
+host1 ansible_ssh_host=192.168.33.11 ansible_ssh_user=vagrant zookeeper_id=1
+host2 ansible_ssh_host=192.168.33.12 ansible_ssh_user=vagrant zookeeper_id=2
+host3 ansible_ssh_host=192.168.33.13 ansible_ssh_user=vagrant zookeeper_id=3
 
 [slaves]
 host4 ansible_ssh_host=192.168.33.14 ansible_ssh_user=vagrant
 
 [all:children]
-masters
+zookeepers
 slaves

@@ -1,7 +1,26 @@
 ---
+#ZOOKEEPER_UPSTREAM_DOCKER_IMAGE: jplock/zookeeper
+UBUNTU_REPO: ubuntu:14.04
 
-ZOOKEEPER_DOCKER_IMAGE_REPO: jplock/zookeeper
-ZOOKEEPER_PORT1: 2181
-ZOOKEEPER_PORT2: 2888
-ZOOKEEPER_PORT3: 3888
+zookeeper_port1: 2181
+zookeeper_port2: 2888
+zookeeper_port3: 3888
+
+apt_cache_timeout: 3600
+client_port: 2181
+init_limit: 5
+sync_limit: 2
+tick_time: 2000
+data_dir: /var/lib/zookeeper
+log_dir: /var/log/zookeeper
+servers: ""
+#TODO(syang): consider how to generate myid dynamically
+#myid: 1
+
+
 zookeeper_container_name: zookeeper_container
+zookeeper_cfg_path_on_host: /tmp/zoo.cfg
+zookeeper_myid_path_on_host: /tmp/myid
+dockerfile_on_host: ~/Dockerfile
+dockerfile_path_on_host: ~/
+local_image_name: zookeeper_snapshot

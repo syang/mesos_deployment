@@ -1,4 +1,4 @@
-- hosts: masters
+- hosts: zookeepers
   sudo: yes
   roles:
     - { role: common}
