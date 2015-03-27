@@ -4,4 +4,7 @@
     - { role: common}
     - { role: zookeeper }
 
-
+- hosts: slaves
+  sudo: yes
+  roles:
+    - { role: zookeeper_client}

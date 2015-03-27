@@ -50,6 +50,7 @@
     -p "{{ zookeeper_port1 }}:{{ zookeeper_port1 }}"
     -p "{{ zookeeper_port2 }}:{{ zookeeper_port2 }}"
     -p "{{ zookeeper_port3 }}:{{ zookeeper_port3 }}"
+    -p 50022:22
     --name "{{ zookeeper_container_name }}"
     "{{ local_image_name }}"
   when: whether_running.stdout != 'running'
