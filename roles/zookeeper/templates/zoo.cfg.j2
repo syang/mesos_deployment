@@ -11,14 +11,14 @@ syncLimit={{sync_limit}}
 
 {% for host in groups.zookeepers %}
 {% if hostvars[host].zookeeper_id == zookeeper_id %}
-server.{{ hostvars[host].zookeeper_id }}=0.0.0.0:2888:3888
+server.{{ hostvars[host].zookeeper_id }}=0.0.0.0:{{zookeeper_port2}}:{{zookeeper_port3}}
 {% else %}
-server.{{ hostvars[host].zookeeper_id }}={{ hostvars[host][internal_interface]['ipv4']['address']|default(hostvars[host]['ansible_default_ipv4']['address']) }}:2888:3888
+server.{{ hostvars[host].zookeeper_id }}={{ hostvars[host][internal_interface]['ipv4']['address']|default(hostvars[host]['ansible_default_ipv4']['address']) }}:{{zookeeper_port2}}:{{zookeeper_port3}}
 {% endif %}
 {% endfor %}
 
 {% else %}
 
-server.1=localhost:2888:3888
+server.1=localhost:{{zookeeper_port2}}:{{zookeeper_port3}}
 
 {% endif %}
