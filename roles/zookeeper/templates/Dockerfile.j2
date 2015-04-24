@@ -22,7 +22,6 @@ ADD myid /var/lib/zookeeper/myid
 
 CMD ["/opt/zookeeper/bin/zkServer.sh", "start-foreground"]
 
-EXPOSE 2181
-EXPOSE 2888
-EXPOSE 3888
-EXPOSE 22
+EXPOSE {{zookeeper_port1}}
+EXPOSE {{zookeeper_port2}}
+EXPOSE {{zookeeper_port3}}
