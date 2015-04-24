@@ -5,6 +5,5 @@
 #- include: CoreOS.yml
 #  when: ansible_os_family == 'CoreOS'
 
-
 - include: Debian.yml
   when: ansible_os_family == 'Debian'
