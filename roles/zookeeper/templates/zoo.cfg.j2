@@ -10,7 +10,11 @@ syncLimit={{sync_limit}}
 {% if 'zookeepers' in groups %}
 
 {% for host in groups.zookeepers %}
-server.{{ hostvars[host].zookeeper_id }}={{ hostvars[host].ipv4_address|default(hostvars[host]['ansible_default_ipv4']['address']) }}:2888:3888
+{% if hostvars[host].zookeeper_id == zookeeper_id %}
+server.{{ hostvars[host].zookeeper_id }}=0.0.0.0:2888:3888
+{% else %}
+server.{{ hostvars[host].zookeeper_id }}={{ hostvars[host][internal_interface]['ipv4']['address']|default(hostvars[host]['ansible_default_ipv4']['address']) }}:2888:3888
+{% endif %}
 {% endfor %}
 
 {% else %}

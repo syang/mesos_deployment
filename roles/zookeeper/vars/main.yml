@@ -2,6 +2,9 @@
 #ZOOKEEPER_UPSTREAM_DOCKER_IMAGE: jplock/zookeeper
 UBUNTU_REPO: ubuntu:14.04
 
+internal_nic: eth1
+internal_interface: "ansible_{{ internal_nic }}"
+
 zookeeper_port1: 2181
 zookeeper_port2: 2888
 zookeeper_port3: 3888
